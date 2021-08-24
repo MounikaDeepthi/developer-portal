@@ -1,0 +1,65 @@
+﻿{
+  "env": {
+    "dev": "https://spenddev.nium.com",
+    "preprod": "https://preprod.spend.nium.com"
+  },
+  "git_repo": {
+    "user_name": "",
+    "password": ""
+  },
+  "service_info": [
+    {
+      "name": "customer_service",
+      "product": "baas",
+      "swagger_info": {
+		"url": "/customer-service/v2/api-docs",
+        "file_name": "",
+        "file_path": ""
+      }
+    },
+    {
+      "name": "cards_service",
+      "product": "baas",
+      "swagger_info": {
+		"url": "/cards-service/v2/api-docs",
+        "file_name": "",
+        "file_path": ""
+      }
+    }
+  ],
+  "compare_swagger_version": true,
+  "baas": {
+    "api_filter": true,
+    "filter_entensions": {
+      "ext_root": "x-info",
+      "ext_key": "apiType",
+      "ext_value": "external"
+    },
+    "delete_params": true,
+    "delete_params_info": [
+      {
+        "name": "Authorization",
+        "in": "header",
+        "required": true,
+        "type": "string",
+        "description": "cardHashId"
+      }
+    ],
+    "add_params": true,
+    "add_params_info": [
+      {
+        "name": "Authorization",
+        "in": "header",
+        "required": true,
+        "type": "string",
+        "description": "cardHashId"
+      }
+    ],
+    "override_tags": true,
+    "tags_info": {
+      "name": "",
+      "description": ""
+    }
+  },
+  "payin": {}
+}
