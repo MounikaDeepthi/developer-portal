@@ -1,0 +1,6453 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "description": "Cards Card Service",
+    "version": "1.0",
+    "title": "Card Service",
+    "termsOfService": "Terms of service Test",
+    "contact": {
+      "name": "CARDS",
+      "url": "https://www.nium.com",
+      "email": "cards-dev@nium.com"
+    },
+    "license": {
+      "name": "Copyright (c) 2020 NIUM"
+    }
+  },
+  "host": "localhost:8087",
+  "basePath": "/cards-service",
+  "tags": [
+    {
+      "name": "PaymentInstrument operations Test",
+      "description": "Payment Instrument Controller"
+    },
+    {
+      "name": "Push Provisioning Controller",
+      "description": "Push Provisioning Controller"
+    },
+    {
+      "name": "REST API for Card operations",
+      "description": "Card Controller"
+    },
+    {
+      "name": "download-controller",
+      "description": "Download Controller"
+    },
+    {
+      "name": "schedule-controller",
+      "description": "Schedule Controller"
+    }
+  ],
+  "paths": {
+    "/api/v1/card/test": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "fetch customer detail by card number test",
+        "operationId": "fetchCustomerByCardIdUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "query",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/card/{cardHashId}": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "fetch card details by card hash id",
+        "operationId": "fetchCardsByCardHashIdUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Card"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/addCardType": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Add card types",
+        "operationId": "addCardTypeUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "AuthorizationTest",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "cardType",
+            "description": "cardType",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCardTypeDTO"
+            }
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CardType"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/cardDetails": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Get Card Details By Card and Proxy No",
+        "operationId": "getCardByCardOrProxyNumberUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "cardDetailRequestDTO",
+            "description": "cardDetailRequestDTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CardDetailRequestDTO"
+            }
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CardClientResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/cardList": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Get Cards list user details",
+        "operationId": "getCardsListUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "pageDTO",
+            "description": "pageDTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PageDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«Card»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/cardTypes": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Get Card Type",
+        "operationId": "getCardTypesUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/carddetails/{cardNumber}": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Get Card Details",
+        "operationId": "getCardDetailsByCardNumberUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardNumber",
+            "in": "path",
+            "description": "cardNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CardDetailResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/downloadCardList": {
+      "get": {
+        "tags": [
+          "download-controller"
+        ],
+        "summary": "download card list",
+        "operationId": "downloadCardListUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestParams",
+            "in": "query",
+            "description": "requestParams",
+            "required": true,
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/downloadFile/{fileName}": {
+      "get": {
+        "tags": [
+          "download-controller"
+        ],
+        "summary": "download File",
+        "operationId": "downloadFileUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "fileName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/downloadRejectedAznacFiles/{fileCatalogueId}": {
+      "get": {
+        "tags": [
+          "download-controller"
+        ],
+        "summary": "Download rejected aznac files",
+        "operationId": "downloadRejectedAznacFilesUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileCatalogueId",
+            "in": "path",
+            "description": "fileCatalogueId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/embossingRecordStatus/{Paging}": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Get Embossing record status",
+        "operationId": "fetchEmbossingRecordStatusUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Paging",
+            "in": "path",
+            "description": "Paging",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«EmbossingLog»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/fetchAllAznacFiles/{paging}": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "fetch all aznac files",
+        "operationId": "fetchAllAznacFilesUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "paging",
+            "in": "path",
+            "description": "paging",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«FileCatalogue»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/fetchAllBulkCardIssuance": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "fetch all bulkCard issuance details",
+        "operationId": "fetchAllBulkCardIssuanceUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "pageDTO",
+            "description": "pageDTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PageDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«BulkCardIssuanceDetails»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/fetchOperatedAznacFileDetails/{fileCatalogueId}": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "fetch Success and failed aznac file details",
+        "operationId": "fetchOperatedAznacFileDetailsUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileCatalogueId",
+            "in": "path",
+            "description": "fileCatalogueId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BulkCardIssuanceDetails"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/list": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Get all cards of client",
+        "operationId": "cardsByClientIdUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "cardList",
+            "description": "cardList",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CardListDTO"
+            }
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«Card»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/listOfCards": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Get Cards by search criteria",
+        "operationId": "getCardsUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "pageDTO",
+            "description": "pageDTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PageDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/notification/tokenDetails": {
+      "post": {
+        "tags": [
+          "Push Provisioning Controller"
+        ],
+        "summary": "Manage Card Token details",
+        "description": "Create and update Card Token on when visa nudge received at customer service.",
+        "operationId": "manageCardTokenDetailsUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "cardTokenRequestDTO",
+            "description": "cardTokenRequestDTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CardTokenRequestDTO"
+            }
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse2"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/paymentInstrument/customer/{customerHashId}": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Used to fetch payment instruments by customerHashId",
+        "operationId": "fetchPaymentInstrumentsByCustomerHashIdUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PaymentInstrumentResponseDTO"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/paymentInstrument/{cardNumber}": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Used to fetch payment instruments by cardNumber",
+        "operationId": "fetchPaymentInstrumentsUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardNumber",
+            "in": "path",
+            "description": "cardNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaymentInstrumentResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/syncCustomerDemog": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "update customer demog details",
+        "operationId": "updateCustomerDemographicUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "demographicUpdateDTO",
+            "description": "demographicUpdateDTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DemographicUpdateDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse2"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/updateAznacFileStatus/{fileCatalogId}/{status}": {
+      "put": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Update bulk card issuance file status",
+        "operationId": "updateBulkCardIssuanceFileStatusUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileCatalogId",
+            "in": "path",
+            "description": "fileCatalogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "description": "status",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/uploadAznacDocuments": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Upload bulk card issuance file",
+        "operationId": "uploadBulkCardIssuanceFileUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "customer_hash",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "document",
+            "required": false,
+            "schema": {
+              "type": "file"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "document2",
+            "required": false,
+            "schema": {
+              "type": "file"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "document3",
+            "required": false,
+            "schema": {
+              "type": "file"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "documentTypeCode",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "document_number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "document_type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "expiry_date",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "fileType",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "issuing_authority",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FileCatalogue"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/uploadAznacResponseFile": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Upload aznac response file",
+        "operationId": "uploadAznacResponseFileUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "customer_hash",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "document",
+            "required": false,
+            "schema": {
+              "type": "file"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "document2",
+            "required": false,
+            "schema": {
+              "type": "file"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "document3",
+            "required": false,
+            "schema": {
+              "type": "file"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "documentTypeCode",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "document_number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "document_type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "expiry_date",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "fileType",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "issuing_authority",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FileCatalogue"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/walletId/{walletId}": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Open Banking Internal API to fetch active card list from walletId.",
+        "operationId": "getCardListFromWalletIdUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletId",
+            "in": "path",
+            "description": "walletId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OpenBankingCardResponseDTO"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/cards/{cardHashId}": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Open Banking Internal API to get card and customer details",
+        "operationId": "getCardAndWalletDetailsByCardHashIdUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CardDetailsResponseDTO"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/assignCard": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Assign a card",
+        "operationId": "assignCardUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "assignCardDTO",
+            "description": "assignCardDTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssignCardDTO"
+            }
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CardAssignResponseDTO"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "external"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Add a card",
+        "operationId": "addCardUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "addCardRequest",
+            "description": "addCardRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCardRequest"
+            }
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AddCardResponseDTO"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "external"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Get card details by cardHashId",
+        "operationId": "cardByCardHashIdUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CardResponseDTO"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "external"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/activate": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Activate a card",
+        "operationId": "activateCardUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActivateCardResponseDTO"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "external"
+        }
+      },
+      "put": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Activate a card",
+        "operationId": "cardActivate2UsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActivateCardResponseDTO"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/addPaymentInstrument": {
+      "post": {
+        "tags": [
+          "PaymentInstrument operations"
+        ],
+        "summary": "add a paymentInstrument",
+        "operationId": "addPaymentInstrumentUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "paymentInstrumentRequestDTO",
+            "description": "paymentInstrumentRequestDTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddPaymentInstrumentRequestDTO"
+            }
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AddPaymentInstrumentResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/cardAction": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Embosser Block update",
+        "operationId": "blockStatusUpdateUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "blockCode",
+            "description": "blockCode",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlockCodeDTO"
+            }
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BlockCodeCardResponseDTO"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "external"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/cvv": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "fetch cvv of a card",
+        "operationId": "fetchCvvUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CvvResponseDTO"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "external"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/demographic": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Demographic Inquiry",
+        "operationId": "demographicInqUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DemographicResponseDTO"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      },
+      "put": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Demographic Update",
+        "operationId": "demographicUpdateUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "demographicUpdate",
+            "description": "demographicUpdate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DemographicRequestDTO"
+            }
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse2"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/embosser": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Embosser card inquiry",
+        "operationId": "embosserInquiryUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EmbosserResponseDTO"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      },
+      "put": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Embosser Update",
+        "operationId": "embosserUpdateUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "embosserUpdateRequestDTO",
+            "description": "embosserUpdateRequestDTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmbosserUpdateRequestDTO"
+            }
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse2"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/page/{page}/size/{size}/getAllPaymentInstruments": {
+      "get": {
+        "tags": [
+          "PaymentInstrument operations"
+        ],
+        "summary": "get all paymentInstruments linked to a card",
+        "operationId": "getAllPaymentInstrumentsUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "page",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "size",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaginatedPaymentInstrumentList"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/paymentInstrumentHashId/{paymentInstrumentHashId}/archivePaymentInstrument": {
+      "post": {
+        "tags": [
+          "PaymentInstrument operations"
+        ],
+        "summary": "archive payment instrument",
+        "operationId": "archivePaymentInstrumentUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "paymentInstrumentHashId",
+            "in": "path",
+            "description": "paymentInstrumentHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/paymentInstrumentHashId/{paymentInstrumentHashId}/getPaymentInstrument": {
+      "get": {
+        "tags": [
+          "PaymentInstrument operations"
+        ],
+        "summary": "get a paymentInstrument",
+        "operationId": "getPaymentInstrumentUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "paymentInstrumentHashId",
+            "in": "path",
+            "description": "paymentInstrumentHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaymentInstrumentDetails"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/paymentInstrumentHashId/{paymentInstrumentHashId}/updateDefaultPaymentInstrument": {
+      "post": {
+        "tags": [
+          "PaymentInstrument operations"
+        ],
+        "summary": "update paymentInstrument to default",
+        "operationId": "updateDefaultPaymentInstrumentUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "paymentInstrumentHashId",
+            "in": "path",
+            "description": "paymentInstrumentHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/paymentInstrumentHashId/{paymentInstrumentHashId}/updatePaymentInstrument": {
+      "post": {
+        "tags": [
+          "PaymentInstrument operations"
+        ],
+        "summary": "update payment instrument",
+        "operationId": "updatePaymentInstrumentUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "addPaymentInstrumentDTO",
+            "description": "addPaymentInstrumentDTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddPaymentInstrumentDTO"
+            }
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "paymentInstrumentHashId",
+            "in": "path",
+            "description": "paymentInstrumentHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/pin": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Pin update",
+        "operationId": "pinUpdateUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "pinUpdate",
+            "description": "pinUpdate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PinUpdateRequestDTO"
+            }
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PinUpdateResponseDTO"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "external"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/provision": {
+      "post": {
+        "tags": [
+          "Push Provisioning Controller"
+        ],
+        "summary": "Provision card.",
+        "description": "Push provision card to wallet providers(ApplePay/GooglePay).",
+        "operationId": "provisionCardUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "pushProvisionRequestDTO",
+            "description": "pushProvisionRequestDTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PushProvisionRequestDTO"
+            }
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlatformPushProvisionResponseDTO"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/replaceCard": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Create a replace card",
+        "operationId": "replaceCardUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "replaceCardRequest",
+            "description": "replaceCardRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReplaceCardRequest"
+            }
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AddCardResponseDTO"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "external"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/unmask": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "unmask card",
+        "operationId": "unmaskCardUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UnmaskCardResponseDTO"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "external"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/unmaskCard": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "unmask card for UI",
+        "operationId": "unmaskCard2UsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cardHashId",
+            "in": "path",
+            "description": "cardHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UnmaskCardResponseDTO"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/cards": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Get card details by customerHashId",
+        "operationId": "cardsByCustomerHashIdUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientHashId",
+            "in": "path",
+            "description": "clientHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "query",
+            "description": "parameters",
+            "required": false,
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "walletHashId",
+            "in": "path",
+            "description": "walletHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "external"
+        }
+      }
+    },
+    "/api/v1/customer/{customerHashId}": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Get Card Details By CustomerHashId and Last 4 Digits of Card",
+        "operationId": "getByCustomerHashIdAndLast4DigitsUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lastFourDigitsOfCard",
+            "in": "query",
+            "description": "lastFourDigitsOfCard",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CardDetailResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/fetchCardDetails": {
+      "get": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Used to fetch card detail for FiServ push-alerts",
+        "operationId": "getCardDetailsUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "account_number",
+            "in": "header",
+            "description": "account_number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "masked_card",
+            "in": "header",
+            "description": "masked_card",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NotificationCardDetailsResponseDTO"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/loststolen": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Lost Stolen Card",
+        "operationId": "lostStolenUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "lostStolen",
+            "description": "lostStolen",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LostStolenRequestDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/scheduler/cards/processor/file/embossing": {
+      "get": {
+        "tags": [
+          "schedule-controller"
+        ],
+        "summary": "Fetch and process embossing file",
+        "operationId": "fetchEmbossFileUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "currentDate",
+            "in": "query",
+            "description": "currentDate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "description": "region",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse2"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/scheduler/cards/processor/file/{embossingLogFileId}": {
+      "get": {
+        "tags": [
+          "schedule-controller"
+        ],
+        "summary": "S3 to vendor sftp upload",
+        "operationId": "s3ToVendorSftpUploadUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "embossingLogFileId",
+            "in": "path",
+            "description": "embossingLogFileId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse2"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    },
+    "/api/v1/{customerHashId}/cards": {
+      "post": {
+        "tags": [
+          "REST API for Card operations"
+        ],
+        "summary": "Get Cards by customer hash Id",
+        "operationId": "cardsByCustomerHashIdUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csrf_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerHashId",
+            "in": "path",
+            "description": "customerHashId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Card"
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-info": {
+          "apiType": "internal"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActivateCardResponseDTO": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "ActivateCardResponseDTO"
+    },
+    "AddCardRequest": {
+      "type": "object",
+      "required": [
+        "cardFeeCurrencyCode",
+        "cardHashId",
+        "cardIssuanceAction",
+        "cardType",
+        "logoId",
+        "plasticId"
+      ],
+      "properties": {
+        "cardExpiry": {
+          "type": "string",
+          "example": 1121,
+          "description": "Should provided only in case of Virtual Card, Format: MMyy"
+        },
+        "cardFeeCurrencyCode": {
+          "type": "string"
+        },
+        "cardHashId": {
+          "type": "string",
+          "example": "9d1cd986-a78d-4321-bf52-5305ed605d76"
+        },
+        "cardIssuanceAction": {
+          "type": "string",
+          "example": "new",
+          "description": "should either 'NEW' or 'ADD_ON'",
+          "enum": [
+            "NEW",
+            "ADD_ON"
+          ]
+        },
+        "cardType": {
+          "type": "string",
+          "example": "GPR_VIR",
+          "description": "defining card types, allowed values are GPR_VIR, GPR_PHY, GPR_VIR_UP2PHY",
+          "enum": [
+            "GPR_VIR",
+            "GPR_PHY",
+            "GPR_VIR_UP2PHY"
+          ]
+        },
+        "countryCode": {
+          "type": "string",
+          "example": "IN"
+        },
+        "demogOverridden": {
+          "type": "boolean",
+          "example": false
+        },
+        "email": {
+          "type": "string",
+          "description": "email@gmail.com"
+        },
+        "embossingLine1": {
+          "type": "string",
+          "example": "John Walker",
+          "description": "card embossing line 1"
+        },
+        "embossingLine2": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "firstName"
+        },
+        "issuanceMode": {
+          "type": "string",
+          "example": "NORMAL_DELIVERY_LOCAL"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "lastName"
+        },
+        "logoId": {
+          "type": "string",
+          "example": "001"
+        },
+        "middleName": {
+          "type": "string",
+          "description": "middleName"
+        },
+        "mobile": {
+          "type": "string",
+          "description": "9999999999"
+        },
+        "plasticId": {
+          "type": "string",
+          "example": 7560101001
+        }
+      },
+      "title": "AddCardRequest"
+    },
+    "AddCardResponseDTO": {
+      "type": "object",
+      "properties": {
+        "cardActivationStatus": {
+          "type": "string"
+        },
+        "cardHashId": {
+          "type": "string"
+        },
+        "maskedCardNumber": {
+          "type": "string"
+        }
+      },
+      "title": "AddCardResponseDTO"
+    },
+    "AddCardTypeDTO": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "GPR_VIR",
+            "GPR_PHY",
+            "GPR_VIR_UP2PHY"
+          ]
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "AddCardTypeDTO"
+    },
+    "AddPaymentInstrumentDTO": {
+      "type": "object",
+      "properties": {
+        "authType": {
+          "type": "string",
+          "enum": [
+            "WALLET",
+            "RHA",
+            "IPP"
+          ]
+        },
+        "card": {
+          "$ref": "#/definitions/Card"
+        },
+        "cardExpiry": {
+          "type": "string"
+        },
+        "cardIssuer": {
+          "type": "string"
+        },
+        "cardName": {
+          "type": "string"
+        },
+        "cardNetwork": {
+          "type": "string"
+        },
+        "cardType": {
+          "type": "string"
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "linkedCardNumber": {
+          "type": "string"
+        },
+        "linkedMaskedCardNumber": {
+          "type": "string"
+        },
+        "mappingKey": {
+          "type": "string",
+          "enum": [
+            "walletId",
+            "ippId",
+            "rhaId"
+          ]
+        },
+        "mappingValue": {
+          "type": "string"
+        },
+        "paymentInstrumentHashId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "BLOCKED",
+            "P_BLOCK",
+            "SUSPEND",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "UPLOADED",
+            "REVIEWED",
+            "FAILED",
+            "SUCCESS",
+            "ASSIGNED",
+            "UNASSIGNED",
+            "TEMP_BLOCK",
+            "All",
+            "ARCHIVED",
+            "VIRTUAL_ACTIVE"
+          ]
+        },
+        "verificationStatus": {
+          "type": "string",
+          "enum": [
+            "VERIFIED",
+            "UNVERIFIED"
+          ]
+        }
+      },
+      "title": "AddPaymentInstrumentDTO"
+    },
+    "AddPaymentInstrumentRequestDTO": {
+      "type": "object",
+      "required": [
+        "cardExpiry",
+        "cardNumber",
+        "cvc"
+      ],
+      "properties": {
+        "cardExpiry": {
+          "type": "string",
+          "example": "encryptedyyMMExpiry"
+        },
+        "cardNumber": {
+          "type": "string",
+          "example": "encryptedCardNumber"
+        },
+        "cvc": {
+          "type": "string",
+          "example": "encryptedCardCVC"
+        }
+      },
+      "title": "AddPaymentInstrumentRequestDTO"
+    },
+    "AddPaymentInstrumentResponse": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "errorDescription": {
+          "type": "string"
+        },
+        "paymentInstrumentHashID": {
+          "type": "string"
+        },
+        "returnUrl": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "AddPaymentInstrumentResponse"
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "type": "string"
+        },
+        "addressLine2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        }
+      },
+      "title": "Address"
+    },
+    "ApiError": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "100 CONTINUE",
+            "101 SWITCHING_PROTOCOLS",
+            "102 PROCESSING",
+            "103 CHECKPOINT",
+            "200 OK",
+            "201 CREATED",
+            "202 ACCEPTED",
+            "203 NON_AUTHORITATIVE_INFORMATION",
+            "204 NO_CONTENT",
+            "205 RESET_CONTENT",
+            "206 PARTIAL_CONTENT",
+            "207 MULTI_STATUS",
+            "208 ALREADY_REPORTED",
+            "226 IM_USED",
+            "300 MULTIPLE_CHOICES",
+            "301 MOVED_PERMANENTLY",
+            "302 FOUND",
+            "302 MOVED_TEMPORARILY",
+            "303 SEE_OTHER",
+            "304 NOT_MODIFIED",
+            "305 USE_PROXY",
+            "307 TEMPORARY_REDIRECT",
+            "308 PERMANENT_REDIRECT",
+            "400 BAD_REQUEST",
+            "401 UNAUTHORIZED",
+            "402 PAYMENT_REQUIRED",
+            "403 FORBIDDEN",
+            "404 NOT_FOUND",
+            "405 METHOD_NOT_ALLOWED",
+            "406 NOT_ACCEPTABLE",
+            "407 PROXY_AUTHENTICATION_REQUIRED",
+            "408 REQUEST_TIMEOUT",
+            "409 CONFLICT",
+            "410 GONE",
+            "411 LENGTH_REQUIRED",
+            "412 PRECONDITION_FAILED",
+            "413 PAYLOAD_TOO_LARGE",
+            "413 REQUEST_ENTITY_TOO_LARGE",
+            "414 URI_TOO_LONG",
+            "414 REQUEST_URI_TOO_LONG",
+            "415 UNSUPPORTED_MEDIA_TYPE",
+            "416 REQUESTED_RANGE_NOT_SATISFIABLE",
+            "417 EXPECTATION_FAILED",
+            "418 I_AM_A_TEAPOT",
+            "419 INSUFFICIENT_SPACE_ON_RESOURCE",
+            "420 METHOD_FAILURE",
+            "421 DESTINATION_LOCKED",
+            "422 UNPROCESSABLE_ENTITY",
+            "423 LOCKED",
+            "424 FAILED_DEPENDENCY",
+            "426 UPGRADE_REQUIRED",
+            "428 PRECONDITION_REQUIRED",
+            "429 TOO_MANY_REQUESTS",
+            "431 REQUEST_HEADER_FIELDS_TOO_LARGE",
+            "451 UNAVAILABLE_FOR_LEGAL_REASONS",
+            "500 INTERNAL_SERVER_ERROR",
+            "501 NOT_IMPLEMENTED",
+            "502 BAD_GATEWAY",
+            "503 SERVICE_UNAVAILABLE",
+            "504 GATEWAY_TIMEOUT",
+            "505 HTTP_VERSION_NOT_SUPPORTED",
+            "506 VARIANT_ALSO_NEGOTIATES",
+            "507 INSUFFICIENT_STORAGE",
+            "508 LOOP_DETECTED",
+            "509 BANDWIDTH_LIMIT_EXCEEDED",
+            "510 NOT_EXTENDED",
+            "511 NETWORK_AUTHENTICATION_REQUIRED"
+          ]
+        }
+      },
+      "title": "ApiError"
+    },
+    "ApiResponse2": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "title": "ApiResponse2"
+    },
+    "AssignCardDTO": {
+      "type": "object",
+      "required": [
+        "accountNumber",
+        "cardNumberLast4Digits"
+      ],
+      "properties": {
+        "accountNumber": {
+          "type": "string",
+          "example": 7560010000907163,
+          "description": "Card account number"
+        },
+        "cardNumberLast4Digits": {
+          "type": "string",
+          "example": 1234,
+          "description": "Last 4 digit of the card number"
+        }
+      },
+      "title": "AssignCardDTO"
+    },
+    "AuthInquiryDTO": {
+      "type": "object",
+      "required": [
+        "cardHashId"
+      ],
+      "properties": {
+        "accountNumber": {
+          "type": "string",
+          "example": "0007560310220072561"
+        },
+        "cardHashId": {
+          "type": "string",
+          "example": "fadf2ddd-b726-46bf-3c0a-965b096478f4"
+        },
+        "endDate": {
+          "type": "string",
+          "example": 19930202
+        },
+        "merchantNumber": {
+          "type": "string",
+          "example": 6543234
+        },
+        "numberOfRecords": {
+          "type": "integer",
+          "format": "int64",
+          "example": 10
+        },
+        "startDate": {
+          "type": "string",
+          "example": 19930202
+        },
+        "terminalId": {
+          "type": "string",
+          "example": 35355433
+        },
+        "transactionAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 24.32
+        }
+      },
+      "title": "AuthInquiryDTO"
+    },
+    "AuthInquiryResponseDTO": {
+      "type": "object",
+      "properties": {
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthInquiryResponseItemDTO"
+          }
+        }
+      },
+      "title": "AuthInquiryResponseDTO"
+    },
+    "AuthInquiryResponseItemDTO": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "actionReason": {
+          "type": "integer"
+        },
+        "authorizationCode": {
+          "type": "string"
+        },
+        "authorizationType": {
+          "type": "string"
+        },
+        "billingAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "billingCurrencyCode": {
+          "type": "string"
+        },
+        "categoryDescription": {
+          "type": "string"
+        },
+        "inputSource": {
+          "type": "string"
+        },
+        "localDate": {
+          "type": "string"
+        },
+        "localTime": {
+          "type": "string"
+        },
+        "maskCardNumber": {
+          "type": "string"
+        },
+        "merchantId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "merchantNameLocation": {
+          "type": "string"
+        },
+        "panEntryDescription": {
+          "type": "string"
+        },
+        "reasonDescription": {
+          "type": "string"
+        },
+        "systemAction": {
+          "type": "string"
+        },
+        "terminalId": {
+          "type": "string"
+        },
+        "transactionDesc": {
+          "type": "string"
+        },
+        "transactionType": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "AuthInquiryResponseItemDTO"
+    },
+    "BlockCodeCardResponseDTO": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "BlockCodeCardResponseDTO"
+    },
+    "BlockCodeDTO": {
+      "type": "object",
+      "required": [
+        "blockAction"
+      ],
+      "properties": {
+        "blockAction": {
+          "type": "string",
+          "description": "The blockAction value can be permanentBlock, temporaryBlock, or unblock.",
+          "enum": [
+            "permanentBlock",
+            "temporaryBlock",
+            "unblock"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "description": "This field will be populated for permanent block only. The value can be fraud, cardLost, cardStolen, and damaged."
+        },
+        "remarks": {
+          "type": "string"
+        }
+      },
+      "title": "BlockCodeDTO"
+    },
+    "BulkCardIssuanceDetails": {
+      "type": "object",
+      "properties": {
+        "accountNumber": {
+          "type": "string"
+        },
+        "applicationReferenceNumber": {
+          "type": "string"
+        },
+        "aznacCardNumber": {
+          "type": "string"
+        },
+        "aznacCustomerNumber": {
+          "type": "string"
+        },
+        "cardId": {
+          "type": "string"
+        },
+        "clientCode": {
+          "type": "string"
+        },
+        "correspondenceAddressCity": {
+          "type": "string"
+        },
+        "correspondenceAddressCountry": {
+          "type": "string"
+        },
+        "correspondenceAddressLine1": {
+          "type": "string"
+        },
+        "correspondenceAddressLine2": {
+          "type": "string"
+        },
+        "correspondenceAddressPostalCode": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "currentAddressCity": {
+          "type": "string"
+        },
+        "currentAddressCountry": {
+          "type": "string"
+        },
+        "currentAddressPostalCode": {
+          "type": "string"
+        },
+        "currentLineAddress1": {
+          "type": "string"
+        },
+        "currentLineAddress2": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "type": "string"
+        },
+        "deviceIndicator": {
+          "type": "string"
+        },
+        "digitalId": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "embosserName1": {
+          "type": "string"
+        },
+        "embosserName2": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "string"
+        },
+        "fileCatalogue": {
+          "$ref": "#/definitions/FileCatalogue"
+        },
+        "fileCreated": {
+          "type": "boolean"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "identId": {
+          "type": "string"
+        },
+        "issueDeliveryOption": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "logoId": {
+          "type": "string"
+        },
+        "maskCardNumber": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "mobileNumber": {
+          "type": "string"
+        },
+        "permanentAddressCity": {
+          "type": "string"
+        },
+        "permanentAddressCountry": {
+          "type": "string"
+        },
+        "permanentAddressLine1": {
+          "type": "string"
+        },
+        "permanentAddressLine2": {
+          "type": "string"
+        },
+        "permanentAddressPostalCode": {
+          "type": "string"
+        },
+        "plasticId": {
+          "type": "string"
+        },
+        "preferredName": {
+          "type": "string"
+        },
+        "regionCode": {
+          "type": "string"
+        },
+        "sequenceNumber": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "BLOCKED",
+            "P_BLOCK",
+            "SUSPEND",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "UPLOADED",
+            "REVIEWED",
+            "FAILED",
+            "SUCCESS",
+            "ASSIGNED",
+            "UNASSIGNED",
+            "TEMP_BLOCK",
+            "All",
+            "ARCHIVED",
+            "VIRTUAL_ACTIVE"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "BulkCardIssuanceDetails"
+    },
+    "Card": {
+      "type": "object",
+      "properties": {
+        "accountNumber": {
+          "type": "string"
+        },
+        "addonCard": {
+          "type": "boolean"
+        },
+        "cardActivationStatus": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "BLOCKED",
+            "P_BLOCK",
+            "SUSPEND",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "UPLOADED",
+            "REVIEWED",
+            "FAILED",
+            "SUCCESS",
+            "ASSIGNED",
+            "UNASSIGNED",
+            "TEMP_BLOCK",
+            "All",
+            "ARCHIVED",
+            "VIRTUAL_ACTIVE"
+          ]
+        },
+        "cardExpiry": {
+          "type": "string"
+        },
+        "cardHashId": {
+          "type": "string"
+        },
+        "cardIssuanceAction": {
+          "type": "string"
+        },
+        "cardNumber": {
+          "type": "string"
+        },
+        "cardStatus": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "BLOCKED",
+            "P_BLOCK",
+            "SUSPEND",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "UPLOADED",
+            "REVIEWED",
+            "FAILED",
+            "SUCCESS",
+            "ASSIGNED",
+            "UNASSIGNED",
+            "TEMP_BLOCK",
+            "All",
+            "ARCHIVED",
+            "VIRTUAL_ACTIVE"
+          ]
+        },
+        "cardType": {
+          "$ref": "#/definitions/CardType"
+        },
+        "clientId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "customerHashId": {
+          "type": "string"
+        },
+        "customerNumber": {
+          "type": "string"
+        },
+        "demogOverridden": {
+          "type": "boolean"
+        },
+        "demogSynced": {
+          "type": "boolean"
+        },
+        "digitalId": {
+          "type": "string"
+        },
+        "emailId": {
+          "type": "string"
+        },
+        "embossedName1": {
+          "type": "string"
+        },
+        "embossedName2": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "issuanceMode": {
+          "type": "string",
+          "enum": [
+            "NORMAL_DELIVERY_LOCAL",
+            "BULK_ISSUE_LOCAL",
+            "BULK_ISSUE_INTERNATIONAL_AU",
+            "BULK_ISSUE_INTERNATIONAL_EU",
+            "EXPRESS_DELIVERY_LOCAL",
+            "INTERNATIONAL_DELIVERY"
+          ]
+        },
+        "issuanceType": {
+          "type": "string",
+          "enum": [
+            "primaryCard",
+            "additionalCard",
+            "replaceCard"
+          ]
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "logoId": {
+          "type": "string"
+        },
+        "logoIdentifier": {
+          "type": "string"
+        },
+        "maskCardNumber": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "mobileNumber": {
+          "type": "string"
+        },
+        "phoneCode": {
+          "type": "string"
+        },
+        "plasticId": {
+          "type": "string"
+        },
+        "proxyNumber": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "regionCode": {
+          "type": "string"
+        },
+        "replacedOn": {
+          "type": "string"
+        },
+        "replacementCard": {
+          "type": "boolean"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "walletId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Card"
+    },
+    "CardAssignResponseDTO": {
+      "type": "object",
+      "properties": {
+        "cardActivationStatus": {
+          "type": "string"
+        },
+        "cardHashId": {
+          "type": "string"
+        },
+        "maskedCardNumber": {
+          "type": "string"
+        }
+      },
+      "title": "CardAssignResponseDTO"
+    },
+    "CardClientResponse": {
+      "type": "object",
+      "properties": {
+        "cardHashId": {
+          "type": "string"
+        },
+        "cardNumber": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "customerHashId": {
+          "type": "string"
+        },
+        "maskedCardNumber": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "CardClientResponse"
+    },
+    "CardDetailRequestDTO": {
+      "type": "object",
+      "properties": {
+        "cardNumber": {
+          "type": "string"
+        },
+        "proxyNumber": {
+          "type": "string"
+        }
+      },
+      "title": "CardDetailRequestDTO"
+    },
+    "CardDetailResponse": {
+      "type": "object",
+      "properties": {
+        "cardActivationStatus": {
+          "type": "string"
+        },
+        "cardId": {
+          "type": "string"
+        },
+        "cardNumber": {
+          "type": "string"
+        },
+        "cardStatus": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "customerHashId": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "maskedCardNumber": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "tokens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CardTokensDTO"
+          }
+        },
+        "walletId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CardDetailResponse"
+    },
+    "CardDetailsResponseDTO": {
+      "type": "object",
+      "properties": {
+        "cardHashId": {
+          "type": "string"
+        },
+        "cardNumber": {
+          "type": "string"
+        },
+        "customerHashId": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "maskedCardNumber": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "walletId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CardDetailsResponseDTO"
+    },
+    "CardListDTO": {
+      "type": "object",
+      "properties": {
+        "accountNumber": {
+          "type": "string"
+        },
+        "cardID": {
+          "type": "string"
+        },
+        "cardNumber": {
+          "type": "string"
+        },
+        "cardStatus": {
+          "type": "string"
+        },
+        "cardTypeCode": {
+          "type": "string",
+          "enum": [
+            "GPR_VIR",
+            "GPR_PHY",
+            "GPR_VIR_UP2PHY"
+          ]
+        },
+        "clientCode": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "customerHashId": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "issuanceType": {
+          "type": "string"
+        },
+        "maskCardNumber": {
+          "type": "string"
+        },
+        "order": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "property": {
+          "type": "string"
+        },
+        "proxyNumber": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "walletId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CardListDTO"
+    },
+    "CardResponseDTO": {
+      "type": "object",
+      "properties": {
+        "blockReason": {
+          "type": "string"
+        },
+        "cardHashId": {
+          "type": "string"
+        },
+        "cardStatus": {
+          "type": "string"
+        },
+        "cardType": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "demogOverridden": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "embossingLine1": {
+          "type": "string"
+        },
+        "embossingLine2": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "issuanceMode": {
+          "type": "string"
+        },
+        "issuanceType": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "logoId": {
+          "type": "string"
+        },
+        "maskedCardNumber": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "plasticId": {
+          "type": "string"
+        },
+        "proxyNumber": {
+          "type": "string"
+        },
+        "regionCode": {
+          "type": "string"
+        },
+        "replacedOn": {
+          "type": "string"
+        },
+        "tokens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CardTokensDTO"
+          }
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "title": "CardResponseDTO"
+    },
+    "CardTokenRequestDTO": {
+      "type": "object",
+      "properties": {
+        "cardHashId": {
+          "type": "string"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "deviceType": {
+          "type": "string"
+        },
+        "providerType": {
+          "type": "string",
+          "enum": [
+            "googlePay",
+            "applePay",
+            "samsungPay",
+            "unknown"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "tokenNumber": {
+          "type": "string"
+        },
+        "tokenReferenceNumber": {
+          "type": "string"
+        },
+        "tokenRequesterId": {
+          "type": "string"
+        }
+      },
+      "title": "CardTokenRequestDTO"
+    },
+    "CardTokensDTO": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "deviceType": {
+          "type": "string"
+        },
+        "providerType": {
+          "type": "string",
+          "enum": [
+            "googlePay",
+            "applePay",
+            "samsungPay",
+            "unknown"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "SUSPENDED",
+            "DEACTIVATED",
+            "UNKNOWN"
+          ]
+        },
+        "tokenNumber": {
+          "type": "string"
+        },
+        "tokenReferenceNumber": {
+          "type": "string"
+        },
+        "tokenRequesterId": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "title": "CardTokensDTO"
+    },
+    "CardType": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "GPR_VIR",
+            "GPR_PHY",
+            "GPR_VIR_UP2PHY"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "BLOCKED",
+            "P_BLOCK",
+            "SUSPEND",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "UPLOADED",
+            "REVIEWED",
+            "FAILED",
+            "SUCCESS",
+            "ASSIGNED",
+            "UNASSIGNED",
+            "TEMP_BLOCK",
+            "All",
+            "ARCHIVED",
+            "VIRTUAL_ACTIVE"
+          ]
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "CardType"
+    },
+    "CvvResponseDTO": {
+      "type": "object",
+      "properties": {
+        "cvv": {
+          "type": "string"
+        },
+        "expiry": {
+          "type": "string"
+        }
+      },
+      "title": "CvvResponseDTO"
+    },
+    "DemographicRequestDTO": {
+      "type": "object",
+      "properties": {
+        "address1": {
+          "type": "string"
+        },
+        "address2": {
+          "type": "string"
+        },
+        "billingAddressId": {
+          "type": "string"
+        },
+        "cardHashId": {
+          "type": "string"
+        },
+        "cardNumber": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "correspondenceAddressId": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "countryId": {
+          "type": "string"
+        },
+        "county": {
+          "type": "string"
+        },
+        "customerHashId": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "customerPhoneCode": {
+          "type": "string"
+        },
+        "deliveryAddressId": {
+          "type": "string"
+        },
+        "deliveryState": {
+          "type": "string"
+        },
+        "dob": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "emp_phone": {
+          "type": "string"
+        },
+        "employer": {
+          "type": "string"
+        },
+        "employer_addr_1": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "genderCode": {
+          "type": "string"
+        },
+        "house_name": {
+          "type": "string"
+        },
+        "house_number": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "mobileNumber": {
+          "type": "string"
+        },
+        "name_line_1": {
+          "type": "string"
+        },
+        "name_line_2": {
+          "type": "string"
+        },
+        "nationality": {
+          "type": "string"
+        },
+        "plasticId": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "regionCode": {
+          "type": "string"
+        },
+        "rm_contact_name": {
+          "type": "string"
+        },
+        "rm_contact_phone": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "suffix": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "title": "DemographicRequestDTO"
+    },
+    "DemographicResponseDTO": {
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "type": "string"
+        },
+        "addressLine2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "dateLastModified": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "memorableWord": {
+          "type": "string"
+        },
+        "mobilePhone": {
+          "type": "string"
+        },
+        "nameLine1": {
+          "type": "string"
+        },
+        "nameLine2": {
+          "type": "string"
+        },
+        "nationality": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        }
+      },
+      "title": "DemographicResponseDTO"
+    },
+    "DemographicUpdateDTO": {
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "type": "string"
+        },
+        "customerHashId": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        }
+      },
+      "title": "DemographicUpdateDTO"
+    },
+    "EmbosserResponseDTO": {
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "type": "string"
+        },
+        "addressLine2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "digitalId": {
+          "type": "string"
+        },
+        "embossedName1": {
+          "type": "string"
+        },
+        "embossedName2": {
+          "type": "string"
+        },
+        "plasticId": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "title": "EmbosserResponseDTO"
+    },
+    "EmbosserUpdateRequestDTO": {
+      "type": "object",
+      "properties": {
+        "deliveryAddress1": {
+          "type": "string"
+        },
+        "deliveryAddress2": {
+          "type": "string"
+        },
+        "deliveryCity": {
+          "type": "string"
+        },
+        "deliveryZipCode": {
+          "type": "string"
+        },
+        "embosserName1": {
+          "type": "string"
+        },
+        "embosserName2": {
+          "type": "string"
+        }
+      },
+      "title": "EmbosserUpdateRequestDTO"
+    },
+    "EmbossingLog": {
+      "type": "object",
+      "properties": {
+        "batchDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "comments": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "fileRegion": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "receivedFileName": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "BLOCKED",
+            "P_BLOCK",
+            "SUSPEND",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "UPLOADED",
+            "REVIEWED",
+            "FAILED",
+            "SUCCESS",
+            "ASSIGNED",
+            "UNASSIGNED",
+            "TEMP_BLOCK",
+            "All",
+            "ARCHIVED",
+            "VIRTUAL_ACTIVE"
+          ]
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "EmbossingLog"
+    },
+    "FileCatalogue": {
+      "type": "object",
+      "properties": {
+        "cardType": {
+          "$ref": "#/definitions/CardType"
+        },
+        "clientCode": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "documentUrl1": {
+          "type": "string"
+        },
+        "documentUrl2": {
+          "type": "string"
+        },
+        "documentUrl3": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "string"
+        },
+        "expiry": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiryDate": {
+          "type": "string"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string",
+          "enum": [
+            "AZNACFILEUPLOAD",
+            "AZNACRESPONSEFILEUPLOAD"
+          ]
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "issuingAuthority": {
+          "type": "string"
+        },
+        "remarks": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "BLOCKED",
+            "P_BLOCK",
+            "SUSPEND",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "UPLOADED",
+            "REVIEWED",
+            "FAILED",
+            "SUCCESS",
+            "ASSIGNED",
+            "UNASSIGNED",
+            "TEMP_BLOCK",
+            "All",
+            "ARCHIVED",
+            "VIRTUAL_ACTIVE"
+          ]
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "FileCatalogue"
+    },
+    "LostStolenRequestDTO": {
+      "type": "object",
+      "properties": {
+        "card_action": {
+          "type": "string"
+        },
+        "card_number": {
+          "type": "string"
+        },
+        "country_of_loss": {
+          "type": "string"
+        },
+        "loss_date": {
+          "type": "string"
+        },
+        "loss_location": {
+          "type": "string"
+        },
+        "loss_type": {
+          "type": "string"
+        },
+        "police_ref_nbr": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        }
+      },
+      "title": "LostStolenRequestDTO"
+    },
+    "NotificationCardDetailsResponseDTO": {
+      "type": "object",
+      "properties": {
+        "cardHashId": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "customerHashId": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "maskedCardNumber": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "phoneCode": {
+          "type": "string"
+        },
+        "walletId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "NotificationCardDetailsResponseDTO"
+    },
+    "OpenBankingCardResponseDTO": {
+      "type": "object",
+      "properties": {
+        "cardHashId": {
+          "type": "string"
+        },
+        "cardNumber": {
+          "type": "string"
+        },
+        "cardStatus": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "BLOCKED",
+            "P_BLOCK",
+            "SUSPEND",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "UPLOADED",
+            "REVIEWED",
+            "FAILED",
+            "SUCCESS",
+            "ASSIGNED",
+            "UNASSIGNED",
+            "TEMP_BLOCK",
+            "All",
+            "ARCHIVED",
+            "VIRTUAL_ACTIVE"
+          ]
+        },
+        "maskCardNumber": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        }
+      },
+      "title": "OpenBankingCardResponseDTO"
+    },
+    "PageDTO": {
+      "type": "object",
+      "properties": {
+        "accountNumber": {
+          "type": "string"
+        },
+        "cardID": {
+          "type": "string"
+        },
+        "cardStatus": {
+          "type": "string"
+        },
+        "cardTypeCode": {
+          "type": "string",
+          "enum": [
+            "GPR_VIR",
+            "GPR_PHY",
+            "GPR_VIR_UP2PHY"
+          ]
+        },
+        "clientCode": {
+          "type": "string"
+        },
+        "customerHashId": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "issuanceType": {
+          "type": "string"
+        },
+        "maskCardNumber": {
+          "type": "string"
+        },
+        "order": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "property": {
+          "type": "string"
+        },
+        "proxyNumber": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "PageDTO"
+    },
+    "Pageable": {
+      "type": "object",
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "paged": {
+          "type": "boolean"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "unpaged": {
+          "type": "boolean"
+        }
+      },
+      "title": "Pageable"
+    },
+    "Page«BulkCardIssuanceDetails»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BulkCardIssuanceDetails"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«BulkCardIssuanceDetails»"
+    },
+    "Page«Card»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Card"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«Card»"
+    },
+    "Page«EmbossingLog»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmbossingLog"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«EmbossingLog»"
+    },
+    "Page«FileCatalogue»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileCatalogue"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«FileCatalogue»"
+    },
+    "PaginatedPaymentInstrumentList": {
+      "type": "object",
+      "properties": {
+        "pageDTO": {
+          "$ref": "#/definitions/PageDTO"
+        },
+        "paymentInstrumentDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentInstrumentDetails"
+          }
+        }
+      },
+      "title": "PaginatedPaymentInstrumentList"
+    },
+    "PaymentInstrumentDetails": {
+      "type": "object",
+      "properties": {
+        "authType": {
+          "type": "string",
+          "enum": [
+            "WALLET",
+            "RHA",
+            "IPP"
+          ]
+        },
+        "cardExpiry": {
+          "type": "string"
+        },
+        "cardIssuer": {
+          "type": "string"
+        },
+        "cardName": {
+          "type": "string"
+        },
+        "cardNetwork": {
+          "type": "string"
+        },
+        "cardType": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "linkedCardStatus": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "BLOCKED",
+            "P_BLOCK",
+            "SUSPEND",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "UPLOADED",
+            "REVIEWED",
+            "FAILED",
+            "SUCCESS",
+            "ASSIGNED",
+            "UNASSIGNED",
+            "TEMP_BLOCK",
+            "All",
+            "ARCHIVED",
+            "VIRTUAL_ACTIVE"
+          ]
+        },
+        "linkedCardVerificationStatus": {
+          "type": "string",
+          "enum": [
+            "VERIFIED",
+            "UNVERIFIED"
+          ]
+        },
+        "linkedMaskedCardNumber": {
+          "type": "string"
+        },
+        "paymentInstrumentHashId": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedBy": {
+          "type": "string"
+        }
+      },
+      "title": "PaymentInstrumentDetails"
+    },
+    "PaymentInstrumentResponse": {
+      "type": "object",
+      "properties": {
+        "authType": {
+          "type": "string"
+        },
+        "cardActivationStatus": {
+          "type": "string"
+        },
+        "cardId": {
+          "type": "string"
+        },
+        "cardNumber": {
+          "type": "string"
+        },
+        "cardStatus": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "customerHashId": {
+          "type": "string"
+        },
+        "linkedCardCustomerId": {
+          "type": "string"
+        },
+        "linkedCardId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "linkedCardNetwork": {
+          "type": "string"
+        },
+        "linkedCardNumber": {
+          "type": "string"
+        },
+        "linkedCardStatus": {
+          "type": "string"
+        },
+        "linkedCardVerificationStatus": {
+          "type": "string"
+        },
+        "linkedMaskedCardNumber": {
+          "type": "string"
+        },
+        "mappingKey": {
+          "type": "string"
+        },
+        "mappingValue": {
+          "type": "string"
+        },
+        "maskCardNumber": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "paymentInstrumentHashId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "walletId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PaymentInstrumentResponse"
+    },
+    "PaymentInstrumentResponseDTO": {
+      "type": "object",
+      "properties": {
+        "authType": {
+          "type": "string",
+          "enum": [
+            "WALLET",
+            "RHA",
+            "IPP"
+          ]
+        },
+        "cardIssuer": {
+          "type": "string"
+        },
+        "cardName": {
+          "type": "string"
+        },
+        "cardNetwork": {
+          "type": "string"
+        },
+        "cardType": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "linkedCardErrorDescription": {
+          "type": "string"
+        },
+        "linkedCardStatus": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "BLOCKED",
+            "P_BLOCK",
+            "SUSPEND",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "UPLOADED",
+            "REVIEWED",
+            "FAILED",
+            "SUCCESS",
+            "ASSIGNED",
+            "UNASSIGNED",
+            "TEMP_BLOCK",
+            "All",
+            "ARCHIVED",
+            "VIRTUAL_ACTIVE"
+          ]
+        },
+        "linkedCardVerificationStatus": {
+          "type": "string",
+          "enum": [
+            "VERIFIED",
+            "UNVERIFIED"
+          ]
+        },
+        "linkedMaskedCardNumber": {
+          "type": "string"
+        },
+        "mappingKey": {
+          "type": "string",
+          "enum": [
+            "walletId",
+            "ippId",
+            "rhaId"
+          ]
+        },
+        "mappingValue": {
+          "type": "string"
+        },
+        "maskedCardNumber": {
+          "type": "string"
+        },
+        "paymentInstrumentHashId": {
+          "type": "string"
+        },
+        "selected": {
+          "type": "boolean"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "title": "PaymentInstrumentResponseDTO"
+    },
+    "PinUpdateRequestDTO": {
+      "type": "object",
+      "required": [
+        "pinBlock"
+      ],
+      "properties": {
+        "pinBlock": {
+          "type": "string",
+          "description": "Base64 encoded pin block."
+        }
+      },
+      "title": "PinUpdateRequestDTO"
+    },
+    "PinUpdateResponseDTO": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "PinUpdateResponseDTO"
+    },
+    "PlatformPushProvisionResponseDTO": {
+      "type": "object",
+      "properties": {
+        "activationData": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/Address"
+        },
+        "cardType": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "encryptedPassData": {
+          "type": "string"
+        },
+        "ephemeralPublicKey": {
+          "type": "string"
+        },
+        "last4": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "opc": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "provisionId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "PlatformPushProvisionResponseDTO"
+    },
+    "PushProvisionRequestDTO": {
+      "type": "object",
+      "properties": {
+        "deviceKey": {
+          "type": "string"
+        },
+        "nonce": {
+          "type": "string"
+        },
+        "nonceSignature": {
+          "type": "string"
+        },
+        "walletAccountId": {
+          "type": "string"
+        },
+        "walletProviderType": {
+          "type": "string",
+          "enum": [
+            "googlePay",
+            "applePay",
+            "samsungPay",
+            "unknown"
+          ]
+        }
+      },
+      "title": "PushProvisionRequestDTO"
+    },
+    "ReplaceCardRequest": {
+      "type": "object",
+      "required": [
+        "cardFeeCurrencyCode"
+      ],
+      "properties": {
+        "cardExpiryTest": {
+          "type": "string",
+          "description": "Expiry date to be set for virtual and virtual upgraded to physical cards. This field is not required for a physical card."
+        },
+        "cardFeeCurrencyCode": {
+          "type": "string",
+          "description": "Currency in which the client wants to levy the card issuance fee."
+        }
+      },
+      "title": "ReplaceCardRequest"
+    },
+    "Sort": {
+      "type": "object",
+      "properties": {
+        "empty": {
+          "type": "boolean"
+        },
+        "sorted": {
+          "type": "boolean"
+        },
+        "unsorted": {
+          "type": "boolean"
+        }
+      },
+      "title": "Sort"
+    },
+    "UnmaskCardResponseDTO": {
+      "type": "object",
+      "properties": {
+        "unMaskedCardNumber": {
+          "type": "string"
+        }
+      },
+      "title": "UnmaskCardResponseDTO"
+    }
+  }
+}

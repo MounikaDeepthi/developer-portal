@@ -1,0 +1,15 @@
+id:
+  providerName: wso2apideveloper
+  version: 1.0.0
+  apiName: CardsService
+context:
+description: This is a sample server online store
+type: HTTP
+availableTiers:
+  - name: Unlimited
+  - name: Bronze
+status: CREATED
+visibility: public
+transports: http,https
+productionUrl: http://localhost.cards.com:8080
+sandboxUrl: http://localhost.cards.com:8081
