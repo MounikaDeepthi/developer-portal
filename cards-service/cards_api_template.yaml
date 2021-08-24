@@ -8,7 +8,7 @@ type: HTTP
 availableTiers:
   - name: Unlimited
   - name: Bronze
-status: CREATED
+status: PUBLISHED
 visibility: public
 transports: http,https
 productionUrl: http://localhost.cards.com:8080
